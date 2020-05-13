@@ -12,7 +12,7 @@ from ftplib import FTP
 IP = "jeangourd.com"
 #IP = "192.168.1.9"
 PORT = 21
-FOLDER = "7"
+FOLDER = "7" # Folder to scan the contents of
 MODE = "7" # Mode is either a 7 or 10
 
 bitsPerByte = 7 # typically either 7 or 8

@@ -3,25 +3,12 @@
 # Date: 5/8/2020
 # Last Modified: 4/21/2020
 # Program: steg.py (python3)
-# Description:
+# Description: Either in encrpyt or decrpyt one file inside another
+# file using the bit or byte steganography methods
 ######################################################################
 from sys import argv, exit, stdout
 
 BYTE_SIZE = 8
-
-####################### Function Declarations ########################
-
-def byte_store():
-	pass
-
-def byte_retrieve():
-	pass
-
-def bit_store():
-	pass
-
-def bit_retrieve():
-	pass
 
 ########################### Main Program #############################
 oppr = 'r' # either store (s) or retrieve (r)
@@ -70,6 +57,7 @@ if oppr is 's':
 		data = f.read()
 		hidden_bytes = bytearray(data)
 
+# byte method store
 if mode is 'B' and oppr is 's':
 	# TODO: add a check to ensure the wrapper is large enough
 
@@ -87,6 +75,7 @@ if mode is 'B' and oppr is 's':
 	stdout.buffer.write(wrapper_bytes)
 	exit(0)
 
+# byte method retrieve
 if mode is 'B' and oppr is 'r':
 	while offset < len(wrapper_bytes):
 		byte = wrapper_bytes[offset]
@@ -103,6 +92,7 @@ if mode is 'B' and oppr is 'r':
 	stdout.buffer.write(hidden_bytes[:-len(sentinel)])
 	exit(0)
 
+# bit method store
 if mode is 'b' and oppr is 's':
 	# Write the data one bit at a time
 	for i in range(len(hidden_bytes)):
@@ -123,10 +113,12 @@ if mode is 'b' and oppr is 's':
 	stdout.buffer.write(wrapper_bytes)
 	exit(0)
 
+# bit method retrieve
 if mode is 'b' and oppr is 'r':
 	while offset < len(wrapper_bytes):
 		byte = 0
 
+		# build the byte, one bit at a time
 		for j in range(BYTE_SIZE):
 			byte |= (wrapper_bytes[offset] & 1)
 
